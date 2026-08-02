@@ -18,7 +18,7 @@
     "test:coverage": "jest --coverage --runInBand"
   },
   "dependencies": {
-    "@react-native/normalize-colors": "0.86.0",
+    "@react-native/normalize-colors": "0.86.2",
     "@starter/theme": "workspace:*",
     "@starter/ui": "workspace:*",
     "@starter/utils": "workspace:*",
