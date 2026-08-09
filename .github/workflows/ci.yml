@@ -50,7 +50,7 @@ jobs:
         run: pnpm export:web
 
       - name: Audit dependencies
-        run: pnpm audit --audit-level moderate
+        run: pnpm audit:dependencies
 
   package-tests:
     name: Shared package tests
@@ -138,6 +138,10 @@ jobs:
           persist-credentials: false
 
       - name: Scan Git history
-        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker run --rm \
+            --network none \
+            --user "$(id -u):$(id -g)" \
+            --volume "$PWD:/repo:ro" \
+            ghcr.io/gitleaks/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f \
+            git --redact --verbose /repo

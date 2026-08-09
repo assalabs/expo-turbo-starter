@@ -240,6 +240,8 @@ appIdentity = replaceStringProperty(appIdentity, 'androidPackage', values.androi
 await writeIfChanged(appIdentityPath, appIdentity, changedFiles);
 
 const appNameFiles = [
+  'AGENTS.md',
+  'README.md',
   'apps/mobile-app/.maestro/smoke.yml',
   'apps/mobile-app/src/screens/home/home-screen.tsx',
   'apps/mobile-app/src/screens/home/home-screen.test.tsx',

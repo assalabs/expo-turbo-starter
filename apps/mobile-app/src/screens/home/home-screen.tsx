@@ -3,7 +3,17 @@ import { View } from 'react-native';
 import { useUnistyles } from 'react-native-unistyles';
 import { Link } from 'expo-router';
 
-import { Button, Card, FormField, Pressable, Screen, Text, TextInput } from '@starter/ui';
+// Keep this expanded so replacing the package scope cannot cross the formatter's print width.
+// prettier-ignore
+import {
+  Button,
+  Card,
+  FormField,
+  Pressable,
+  Screen,
+  Text,
+  TextInput,
+} from '@starter/ui';
 import { clamp } from '@starter/utils';
 
 export function HomeScreen() {

@@ -23,12 +23,23 @@ of copying it repeatedly.
 
 For every Expo SDK upgrade:
 
-1. Create a dedicated branch and update Expo-managed dependencies with `expo install`.
-2. Update duplicated React Native test dependencies in shared native packages.
-3. Run `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm expo:doctor`,
-   `pnpm check:workflows`, and `pnpm verify:template`.
-4. Run both platforms through `.eas/workflows/e2e.yml` before tagging the template release.
-5. Record native rebuild requirements and downstream migration notes in `CHANGELOG.md`.
+1. Create a dedicated branch.
+2. From the repository root, update Expo and its compatibility set in the mobile workspace:
+
+   ```sh
+   pnpm --filter ./apps/mobile-app exec expo install expo@latest
+   pnpm --filter ./apps/mobile-app exec expo install --fix
+   ```
+
+   For SDK patch alignment without a major upgrade, run only the second command.
+
+3. Update duplicated React Native test dependencies in shared native packages to match the app.
+4. Run `pnpm install` to refresh `pnpm-lock.yaml`, then prove it is reproducible with
+   `pnpm install --frozen-lockfile`.
+5. Run `pnpm check`, `pnpm expo:doctor`, `pnpm export:web`, `pnpm check:workflows`,
+   `pnpm audit:dependencies`, and `pnpm verify:template`.
+6. Run both platforms through `.eas/workflows/e2e.yml` before tagging the template release.
+7. Record native rebuild requirements and downstream migration notes in `CHANGELOG.md`.
 
 Dependabot is an input to this loop, not an automatic compatibility decision. Expo, React, React
 Native, Jest, TypeScript, and native modules should move as a tested compatibility set.

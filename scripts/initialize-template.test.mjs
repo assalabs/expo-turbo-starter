@@ -6,6 +6,7 @@ import path from 'node:path';
 import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
+import { check as checkFormatting, resolveConfig } from 'prettier';
 
 const execFileAsync = promisify(execFile);
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -36,7 +37,7 @@ async function readJson(filePath) {
   return JSON.parse(await readFile(filePath, 'utf8'));
 }
 
-async function initialize(workspace) {
+async function initialize(workspace, { appName = 'Acme Mobile', scope = '@acme' } = {}) {
   return execFileAsync(
     process.execPath,
     [
@@ -45,9 +46,9 @@ async function initialize(workspace) {
       '--repo-name',
       'acme-mobile',
       '--scope',
-      '@acme',
+      scope,
       '--app-name',
-      'Acme Mobile',
+      appName,
       '--app-slug',
       'acme-mobile',
       '--app-scheme',
@@ -97,4 +98,28 @@ test('updates the app identity defaults used by Expo configuration', async (cont
 
   const environmentExample = await readFile(path.join(workspace, '.env.example'), 'utf8');
   assert.match(environmentExample, /# APP_ENV=development/);
+});
+
+test('keeps generated source formatted for long valid scopes and renames project guidance', async (context) => {
+  const { parentDirectory, workspace } = await createTemplateCopy();
+  context.after(() => rm(parentDirectory, { force: true, recursive: true }));
+
+  await initialize(workspace, {
+    appName: 'Release Validation Mobile',
+    scope: '@release-validation',
+  });
+
+  const homeScreenPath = path.join(workspace, 'apps/mobile-app/src/screens/home/home-screen.tsx');
+  const homeScreenSource = await readFile(homeScreenPath, 'utf8');
+  const readmeSource = await readFile(path.join(workspace, 'README.md'), 'utf8');
+  const agentGuidanceSource = await readFile(path.join(workspace, 'AGENTS.md'), 'utf8');
+  const prettierConfig = await resolveConfig(path.join(repositoryRoot, 'README.md'));
+
+  assert.equal(
+    await checkFormatting(homeScreenSource, { ...prettierConfig, filepath: homeScreenPath }),
+    true
+  );
+  assert.match(homeScreenSource, /from '@release-validation\/ui'/);
+  assert.match(readmeSource, /^# Release Validation Mobile/m);
+  assert.match(agentGuidanceSource, /^# Release Validation Mobile/m);
 });

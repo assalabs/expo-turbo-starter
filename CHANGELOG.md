@@ -14,3 +14,9 @@ automatically.
   guards.
 - Added a root recovery screen with a provider-neutral error-reporting seam.
 - Added opt-in EAS production delivery and Maestro smoke-test workflows.
+- Aligned the release candidate with current Expo SDK 57 patches and secured vulnerable transitive
+  tooling dependencies.
+- Hardened initialization formatting, cold Jest runs, Turbo cache invalidation, generated-package
+  cleanup, and first-run/upgrade documentation.
+- Replaced the license-gated Gitleaks Action wrapper with a pinned standalone scan that works for
+  both personal and organization-owned template consumers.

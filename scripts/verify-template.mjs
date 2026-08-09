@@ -24,7 +24,7 @@ const initializationArguments = [
   '--repo-name',
   'canary-mobile',
   '--scope',
-  '@canary',
+  '@release-validation',
   '--app-name',
   'Canary Mobile',
   '--app-slug',
@@ -84,7 +84,7 @@ try {
     'utf8'
   );
 
-  assert.equal(initializationRecord.scope, '@canary');
+  assert.equal(initializationRecord.scope, '@release-validation');
   assert.equal(initializationRecord.templateVersion, sourceManifest.version);
   assert.doesNotMatch(appIdentitySource, /com\.example\.expoturbostarter/);
 

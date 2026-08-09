@@ -25,7 +25,27 @@ see it.
 
 ## Get moving
 
-Start from GitHub's **Use this template** button, or clone the repository, then run:
+Prefer GitHub's **Use this template** button so the new project gets its own history and `origin`.
+If you clone manually, replace the starter remote before the first push:
+
+```sh
+git clone git@github.com:assalabs/expo-turbo-starter.git acme-mobile
+cd acme-mobile
+git remote rename origin upstream
+git remote add origin git@github.com:YOUR_ACCOUNT/acme-mobile.git
+```
+
+Create the destination repository before adding its remote. Then activate the pinned toolchain
+before running pnpm for the first time:
+
+```sh
+nvm install
+nvm use
+corepack enable
+corepack install
+```
+
+Initialize and verify the project:
 
 ```sh
 pnpm run setup
@@ -34,8 +54,8 @@ pnpm check
 pnpm ios
 ```
 
-The setup script asks for your package scope, app name, URL scheme, and native identifiers. It can
-also run without prompts:
+The setup script asks for your package scope, app name, URL scheme, and native identifiers. It also
+updates the README and agent-guidance titles, and it can run without prompts:
 
 ```sh
 pnpm run setup --yes \
@@ -78,28 +98,29 @@ starter, review agent work, and adapt the instructions once the template becomes
 
 ## Commands you will actually use
 
-| Command                | What it does                                      |
-| ---------------------- | ------------------------------------------------- |
-| `pnpm dev`             | Start Metro for the development client            |
-| `pnpm ios`             | Build and run the iOS app                         |
-| `pnpm android`         | Build and run the Android app                     |
-| `pnpm web`             | Start the web app                                 |
-| `pnpm test`            | Run every Jest suite                              |
-| `pnpm test:watch`      | Watch the app Jest suite                          |
-| `pnpm test:coverage`   | Write coverage reports for every workspace        |
-| `pnpm generate`        | Generate a shared package                         |
-| `pnpm lint`            | Lint every workspace                              |
-| `pnpm typecheck`       | Type-check every workspace                        |
-| `pnpm check`           | Run the same core quality gate used before a push |
-| `pnpm expo:doctor`     | Check Expo dependencies and project health        |
-| `pnpm check:workflows` | Validate EAS YAML against Expo's live schema      |
-| `pnpm verify:template` | Exercise a clean, renamed template copy           |
-| `pnpm export:web`      | Produce a static web export                       |
-| `pnpm clean`           | Remove generated caches, builds, and coverage     |
+| Command                   | What it does                                      |
+| ------------------------- | ------------------------------------------------- |
+| `pnpm dev`                | Start Metro for the development client            |
+| `pnpm ios`                | Build and run the iOS app                         |
+| `pnpm android`            | Build and run the Android app                     |
+| `pnpm web`                | Start the web app                                 |
+| `pnpm test`               | Run every Jest suite                              |
+| `pnpm test:watch`         | Watch the app Jest suite                          |
+| `pnpm test:coverage`      | Write coverage reports for every workspace        |
+| `pnpm audit:dependencies` | Audit dependencies with documented exceptions     |
+| `pnpm generate`           | Generate a shared package                         |
+| `pnpm lint`               | Lint every workspace                              |
+| `pnpm typecheck`          | Type-check every workspace                        |
+| `pnpm check`              | Run the same core quality gate used before a push |
+| `pnpm expo:doctor`        | Check Expo dependencies and project health        |
+| `pnpm check:workflows`    | Validate EAS YAML against Expo's live schema      |
+| `pnpm verify:template`    | Exercise a clean, renamed template copy           |
+| `pnpm export:web`         | Produce a static web export                       |
+| `pnpm clean`              | Remove generated caches, builds, and coverage     |
 
 Run commands from the repository root. Node and pnpm versions are pinned in `.nvmrc` and
-`package.json`; with Corepack installed, `corepack enable && corepack install` selects the right
-pnpm version.
+`package.json`. The audit exceptions and their review dates are documented in
+[`SECURITY.md`](SECURITY.md).
 
 ## A note about Expo Go
 
@@ -145,7 +166,8 @@ Tests live beside the code they exercise as `*.test.ts` or `*.test.tsx`:
 - native-impacting pull requests compile Android and iOS projects, not just JavaScript
 
 Prefer behavior and accessibility assertions over snapshots. If you change Expo dependencies or
-configuration, run both `pnpm expo:doctor` and `pnpm export:web` before opening a pull request.
+configuration, run `pnpm expo:doctor`, `pnpm export:web`, and `pnpm audit:dependencies` before
+opening a pull request.
 
 ## Make it yours
 
