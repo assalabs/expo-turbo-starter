@@ -40,7 +40,8 @@
 
 - Documentation-only changes: run `pnpm format:check`.
 - Code changes: run `pnpm check`.
-- Dependency or Expo configuration changes: also run `pnpm expo:doctor` and `pnpm export:web`.
+- Dependency or Expo configuration changes: also run `pnpm expo:doctor`, `pnpm export:web`, and
+  `pnpm audit:dependencies`.
 - EAS workflow changes: also run `pnpm check:workflows`.
 - Initialization, identity, workspace, or toolchain changes: also run `pnpm verify:template`.
 - Generator changes: cover filesystem behavior with `pnpm test:scripts` and smoke-test both package

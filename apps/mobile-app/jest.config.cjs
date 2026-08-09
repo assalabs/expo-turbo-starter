@@ -1,5 +1,7 @@
 module.exports = {
   preset: 'jest-expo',
+  testTimeout: 15000,
+  watchman: false,
   setupFiles: ['react-native-unistyles/mocks', '<rootDir>/jest.setup.ts'],
   testEnvironment: 'node',
   moduleNameMapper: {

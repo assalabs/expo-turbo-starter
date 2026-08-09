@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-expo',
+  watchman: false,
   setupFiles: ['react-native-unistyles/mocks', '<rootDir>/jest.setup.ts'],
   testEnvironment: 'node',
   collectCoverageFrom: [

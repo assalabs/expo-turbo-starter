@@ -27,6 +27,7 @@ run `pnpm check` before you send the change. Dependency or Expo configuration ch
 pnpm expo:doctor
 pnpm export:web
 pnpm check:workflows
+pnpm audit:dependencies
 ```
 
 If you change the setup script or any starter-wide default, run `pnpm verify:template`. It creates a

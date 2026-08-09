@@ -18,3 +18,22 @@ thread.
 
 Maintainers should acknowledge a report within seven days and coordinate disclosure after a fix is
 available. Please allow a reasonable remediation window before publishing details.
+
+## Dependency audit exceptions
+
+`pnpm audit:dependencies` remains a blocking CI gate. Two high-severity `image-size`
+denial-of-service advisories are temporarily excluded because GitHub currently lists no patched npm
+release:
+
+- `CVE-2025-71329` / `GHSA-5p2g-fcmc-qvqq`
+- `CVE-2025-71330` / `GHSA-w3rx-r6r6-pgpr`
+
+Both arrive through the React Native/Expo development-time Metro toolchain. The starter does not
+process user-supplied images on a server, and application assets remain repository-controlled,
+which limits the exposed path while upstream is unpatched. Do not feed untrusted ICNS, JXL, or HEIF
+assets into Metro.
+
+The exception owner is the starter maintainers. Recheck the advisories and the Metro dependency
+path by **2026-09-09**, or immediately when Expo, React Native, or `image-size` publishes a fix.
+Remove the corresponding entries from `pnpm.auditConfig.ignoreCves` in the root `package.json` as
+soon as a patched compatibility set is available.
