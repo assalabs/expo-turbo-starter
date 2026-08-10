@@ -93,6 +93,10 @@ That is most of the architecture. The reasoning and tradeoffs are in
 belongs, which commands to use, and what must pass before a change is done. Keep project truth there
 instead of copying the same instructions into a collection of tool-specific files.
 
+For extra Expo-specific guidance, Codex users can optionally install Expo's official marketplace
+plugin with `codex plugin add expo@openai-curated`. The plugin is maintained outside the repository,
+so it can update without vendoring Expo's skill files into each project.
+
 [docs/working-with-agents.md](docs/working-with-agents.md) explains how to prompt against this
 starter, review agent work, and adapt the instructions once the template becomes your product.
 
