@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~57.0.8",
-    "@react-native/normalize-colors": "0.86.2",
+    "@react-native/normalize-colors": "0.87.1",
     "@starter/theme": "workspace:*",
     "@starter/ui": "workspace:*",
     "@starter/utils": "workspace:*",
