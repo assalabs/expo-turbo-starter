@@ -4,22 +4,44 @@ updates:
     directory: /
     schedule:
       interval: weekly
+      day: monday
+    # Breaking upgrades are handled through docs/upgrading.md, not grouped with routine updates.
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+      # React Native uses 0.x releases, so minor updates also change its compatibility line.
+      - dependency-name: 'react-native'
+        update-types: ['version-update:semver-minor']
+      - dependency-name: '@react-native/*'
+        update-types: ['version-update:semver-minor']
+      - dependency-name: 'react-native-*'
+        update-types: ['version-update:semver-minor']
     groups:
-      expo:
+      expo-compatible-patches:
+        update-types: [patch]
         patterns:
           - expo
           - expo-*
           - '@expo/*'
+          - '@react-native/*'
+          - '@types/react'
+          - eslint-config-expo
+          - jest-expo
           - react
           - react-dom
           - react-native
           - react-native-*
       development-tooling:
         dependency-type: development
+        update-types: [minor, patch]
         exclude-patterns:
           - expo
           - expo-*
           - '@expo/*'
+          - '@react-native/*'
+          - '@types/react'
+          - eslint-config-expo
+          - jest-expo
           - react
           - react-dom
           - react-native

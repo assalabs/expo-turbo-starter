@@ -43,3 +43,20 @@ For every Expo SDK upgrade:
 
 Dependabot is an input to this loop, not an automatic compatibility decision. Expo, React, React
 Native, Jest, TypeScript, and native modules should move as a tested compatibility set.
+
+## Routine maintenance
+
+CI runs weekly and can be dispatched manually to catch new advisories and SDK patch requirements
+even when no source files have changed. Keep its quality, shared-package tests, app tests,
+generated-template canary, dependency review, and secret scan checks required on the default branch.
+Dependency and native configuration changes must also pass both native compile jobs before merging.
+
+Dependabot groups Expo-compatible patch proposals, including the React Native development packages
+and Expo test/lint presets. Other development tools receive minor and patch proposals. Major npm
+upgrades and React Native minor upgrades are handled deliberately through the upgrade loop above;
+do not infer compatibility from a version number or combine them with routine patches. Keep Jest,
+TypeScript, and ESLint on versions supported by the Expo presets and TypeScript tooling.
+
+Review dependency overrides and the dated exceptions in `SECURITY.md` during each maintenance pass.
+Overrides that used to fix an advisory can become vulnerable themselves. Validate the generated
+consumer as well as the source checkout before publishing a template release.

@@ -4,6 +4,22 @@ This file records changes that affect newly generated applications and the work 
 them in existing applications. GitHub template repositories do not update their consumers
 automatically.
 
+## Unreleased
+
+- Aligned Expo SDK 57 patches and React Native 0.86.3 across the app and shared UI, including native
+  test and Metro packages. Updated compatible development tooling while retaining Jest 29,
+  TypeScript 6, and ESLint 9.
+- Refreshed transitive dependencies and security overrides. Fixed the Expo Router URL decoder
+  advisory with a scoped override and a CommonJS compatibility patch, with routing regression tests.
+- Added weekly and manual CI health runs, separated compatible Dependabot updates from deliberate
+  migrations, and included dependency audits and EAS schema validation in the generated canary.
+- Updated EAS schema validation to accept the upstream schema's union types while retaining strict
+  validation, and rechecked the two temporary image-size exceptions.
+
+Adoption: copy dependency manifests, security overrides, and `patches/query-string@7.1.3.patch`
+together; regenerate and commit your application's lockfile. Rebuild native development clients
+after updating Expo and React Native. Keep application identifiers and product configuration intact.
+
 ## 1.0.0 - 2026-07-19
 
 - Established the Expo SDK 57, React Native 0.86, Node 24, and pnpm 10 baseline.

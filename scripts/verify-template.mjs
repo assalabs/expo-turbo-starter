@@ -91,6 +91,8 @@ try {
   await run('pnpm', ['install', '--frozen-lockfile'], workspace);
   await run('pnpm', ['check'], workspace);
   await run('pnpm', ['expo:doctor'], workspace);
+  await run('pnpm', ['check:workflows'], workspace);
+  await run('pnpm', ['audit:dependencies'], workspace);
   await run('pnpm', ['export:web'], workspace);
   await run(
     'pnpm',

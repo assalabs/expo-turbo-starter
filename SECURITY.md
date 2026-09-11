@@ -21,6 +21,18 @@ available. Please allow a reasonable remediation window before publishing detail
 
 ## Dependency audit exceptions
 
+### Expo Router URL decoder
+
+Expo Router 57 still depends on CommonJS `query-string@7.1.3`, which requests an affected
+`decode-uri-component` version (`CVE-2026-45822` / `GHSA-vcc3-ghjq-m6fr`). The scoped override
+selects the fixed `decode-uri-component@0.5.0`. A one-line pnpm patch reads its ESM default export
+from `query-string`, preserving the query-string API used by Expo Router. Jest transforms that
+decoder, and routing dependency tests cover query round trips and bounded malformed-input parsing.
+This advisory is fixed, not suppressed. Remove the patch and override when Expo Router adopts a
+compatible fixed decoder upstream.
+
+### Temporary image-size exceptions
+
 `pnpm audit:dependencies` remains a blocking CI gate. Two high-severity `image-size`
 denial-of-service advisories are temporarily excluded because GitHub currently lists no patched npm
 release:
@@ -33,7 +45,8 @@ process user-supplied images on a server, and application assets remain reposito
 which limits the exposed path while upstream is unpatched. Do not feed untrusted ICNS, JXL, or HEIF
 assets into Metro.
 
-The exception owner is the starter maintainers. Recheck the advisories and the Metro dependency
-path by **2026-09-09**, or immediately when Expo, React Native, or `image-size` publishes a fix.
+The exception owner is the starter maintainers. Both upstream advisories were rechecked on
+**2026-09-11** and still list no patched release. Recheck the advisories and the Metro dependency
+path by **2026-10-11**, or immediately when Expo, React Native, or `image-size` publishes a fix.
 Remove the corresponding entries from `pnpm.auditConfig.ignoreCves` in the root `package.json` as
 soon as a patched compatibility set is available.
