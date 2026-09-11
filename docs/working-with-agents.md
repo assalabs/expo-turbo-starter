@@ -22,6 +22,21 @@ The included instructions cover the facts that are easy to get subtly wrong:
 
 That means a task can focus on the outcome instead of repeating the repository tour every time.
 
+## Optional Expo skills
+
+Keep third-party skills out of the project unless the team deliberately needs to pin and review
+their contents with the application. Codex users can install Expo's official marketplace plugin at
+the user level instead:
+
+```sh
+codex plugin add expo@openai-curated
+```
+
+Restart or refresh Codex after installing or updating the plugin. Other coding agents can follow the
+[official Expo skills instructions](https://expo.dev/skills) for their supported installation path.
+Expo documentation and the Expo and EAS CLIs remain the source of truth when their current behavior
+differs from a skill.
+
 ## Prompts that give an agent a fair chance
 
 A useful task names the outcome, the important boundary, and the evidence you expect. It does not
