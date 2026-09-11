@@ -4,7 +4,7 @@ This file records changes that affect newly generated applications and the work 
 them in existing applications. GitHub template repositories do not update their consumers
 automatically.
 
-## Unreleased
+## 1.0.1 - 2026-09-11
 
 - Aligned Expo SDK 57 patches and React Native 0.86.3 across the app and shared UI, including native
   test and Metro packages. Updated compatible development tooling while retaining Jest 29,
@@ -15,6 +15,9 @@ automatically.
   migrations, and included dependency audits and EAS schema validation in the generated canary.
 - Updated EAS schema validation to accept the upstream schema's union types while retaining strict
   validation, and rechecked the two temporary image-size exceptions.
+- Updated pinned Checkout, Setup Java, and Gradle Actions. Gradle's proprietary caching component is
+  explicitly disabled; wrapper validation remains enabled.
+- Documented optional installation of Expo's official Codex plugin without vendoring its skills.
 
 Adoption: copy dependency manifests, security overrides, and `patches/query-string@7.1.3.patch`
 together; regenerate and commit your application's lockfile. Rebuild native development clients
