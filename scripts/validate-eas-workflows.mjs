@@ -19,7 +19,8 @@ if (!response.ok) {
 }
 
 const body = await response.json();
-const ajv = new Ajv2020({ allErrors: true, strict: true });
+// The official schema permits multiple JSON types for workflow input descriptions.
+const ajv = new Ajv2020({ allErrors: true, strict: true, allowUnionTypes: true });
 addFormats(ajv);
 const validate = ajv.compile(body.data);
 
