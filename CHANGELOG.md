@@ -4,6 +4,28 @@ This file records changes that affect newly generated applications and the work 
 them in existing applications. GitHub template repositories do not update their consumers
 automatically.
 
+## 1.0.2 - 2026-11-12
+
+- Aligned the app and shared UI with the newest Expo SDK 57 patches (Expo 57.0.33, Expo Router
+  57.0.31) and updated compatible native patches. Reanimated 4.5.1 and Worklets 0.10.1 stay on the
+  versions Expo SDK 57 expects. React, React Native 0.86.3, Jest 29, TypeScript 6, and ESLint 9 are
+  unchanged.
+- Updated development tooling: Turbo 2.11, Prettier 3.10, React Native Testing Library 14.1, and
+  related patches. `test-renderer` stays on 1.2.0 because newer releases require React 19.3.
+- Refreshed security overrides for `node-forge`, `shell-quote`, `minimatch`, `brace-expansion`,
+  `fast-uri`, `zod`, `source-map-js`, and `decode-uri-component` so the dependency audit passes at
+  the moderate level again.
+- Declared `react-native-worklets` in the shared UI package so the app and UI tests resolve a single
+  Unistyles instance.
+- Excluded `react-native-edge-to-edge` from the Expo Doctor React Native Directory check. The
+  package is now flagged as unmaintained but remains installed as a Unistyles peer; removing it is
+  deferred to the next SDK upgrade.
+- Updated pinned Setup Java and Gradle Actions.
+
+Adoption: copy dependency manifests and security overrides together, then regenerate and commit the
+lockfile of your application. Add `react-native-worklets` to any package that declares
+`react-native-reanimated`. Rebuild native development clients after updating Expo packages.
+
 ## 1.0.1 - 2026-09-11
 
 - Aligned Expo SDK 57 patches and React Native 0.86.3 across the app and shared UI, including native
