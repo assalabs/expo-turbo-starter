@@ -50,3 +50,15 @@ The exception owner is the starter maintainers. Both upstream advisories were re
 path by **2026-10-11**, or immediately when Expo, React Native, or `image-size` publishes a fix.
 Remove the corresponding entries from `pnpm.auditConfig.ignoreCves` in the root `package.json` as
 soon as a patched compatibility set is available.
+
+## License review exceptions
+
+Dependency review denies GPL and AGPL licenses on pull requests. One package is exempted:
+
+- `node-forge` declares `(BSD-3-Clause OR GPL-2.0)`. A dual license lets the user choose, and this
+  starter uses it under BSD-3-Clause. The review action rejects any expression that mentions a
+  denied license, so `node-forge` is listed in `allow-dependencies-licenses` in
+  `.github/workflows/ci.yml`. It arrives through the Expo CLI as development tooling and is not
+  bundled into applications.
+
+Recheck this entry when `node-forge` changes its license expression or leaves the dependency graph.
