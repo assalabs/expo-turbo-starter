@@ -21,6 +21,8 @@ automatically.
   package is now flagged as unmaintained but remains installed as a Unistyles peer; removing it is
   deferred to the next SDK upgrade.
 - Updated pinned Setup Java and Gradle Actions.
+- Exempted the dual-licensed `node-forge` from the pull-request license review, which rejected its
+  `(BSD-3-Clause OR GPL-2.0)` expression. The exception is recorded in `SECURITY.md`.
 
 Adoption: copy dependency manifests and security overrides together, then regenerate and commit the
 lockfile of your application. Add `react-native-worklets` to any package that declares
