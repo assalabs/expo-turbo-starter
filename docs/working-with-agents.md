@@ -37,6 +37,31 @@ Restart or refresh Codex after installing or updating the plugin. Other coding a
 Expo documentation and the Expo and EAS CLIs remain the source of truth when their current behavior
 differs from a skill.
 
+## Optional device tooling
+
+Unit tests cannot tell an agent whether a screen actually looks and behaves correctly.
+[Argent](https://www.npmjs.com/package/@swmansion/argent) gives a coding agent an MCP server and
+skills for driving an iOS simulator or Android emulator: launching the app, tapping and typing,
+reading the element tree, taking screenshots, debugging through Metro, and profiling. Like the Expo
+skills, install it at the user level rather than committing it to the project:
+
+```sh
+npx @swmansion/argent@latest init -y
+```
+
+A few things are specific to this starter:
+
+- Unistyles includes native code, so point the agent at a development build from `pnpm ios` or
+  `pnpm android`, not Expo Go.
+- Give interactive elements a stable `testID` when a task adds them. Argent and Maestro both target
+  elements more reliably by identifier than by visible text.
+- The Maestro flow in `apps/mobile-app/.maestro` remains the smoke path that EAS workflows run. Use
+  device tooling to verify a change while working on it, not as a replacement for that flow.
+
+`argent init --local` instead commits a devDependency and its configuration for the whole team.
+Choose that deliberately, for the same reason as vendoring skills: the tool's files then ship with,
+and are reviewed alongside, the application.
+
 ## Prompts that give an agent a fair chance
 
 A useful task names the outcome, the important boundary, and the evidence you expect. It does not
