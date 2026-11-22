@@ -97,6 +97,10 @@ For extra Expo-specific guidance, Codex users can optionally install Expo's offi
 plugin with `codex plugin add expo@openai-curated`. The plugin is maintained outside the repository,
 so it can update without vendoring Expo's skill files into each project.
 
+To let an agent verify UI changes on a simulator or emulator, optionally install
+[Argent](https://www.npmjs.com/package/@swmansion/argent) at the user level with
+`npx @swmansion/argent@latest init -y`.
+
 [docs/working-with-agents.md](docs/working-with-agents.md) explains how to prompt against this
 starter, review agent work, and adapt the instructions once the template becomes your product.
 
