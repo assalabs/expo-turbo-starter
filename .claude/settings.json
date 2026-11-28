@@ -1,0 +1,9 @@
+{
+  "extraKnownMarketplaces": {
+    "assalabs": {
+      "source": { "source": "github", "repo": "assalabs/claude-plugins" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": { "assalabs@assalabs": true }
+}

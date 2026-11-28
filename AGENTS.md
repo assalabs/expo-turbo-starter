@@ -36,6 +36,10 @@
 - Unistyles includes native code. Use a development build instead of Expo Go when exercising native
   behavior.
 
+## Features
+
+- Features go through three gates (requirements, design, implementation) with the shared `/assalabs:feature` skill from [`assalabs/claude-plugins`](https://github.com/assalabs/claude-plugins). Install it once per clone with `claude plugin install assalabs@assalabs --scope project`. The first time it runs here it writes `docs/feature-workflow.md` with the owner.
+
 ## Verification
 
 - Documentation-only changes: run `pnpm format:check`.
